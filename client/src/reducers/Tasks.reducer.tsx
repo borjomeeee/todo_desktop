@@ -10,6 +10,7 @@ import {
 
 // UTILS
 import { TaskActionType } from "../utils/types";
+import { saveTasksLocal, clearTasksLocal } from "../utils/storage";
 
 export default (
   state: ITasksInitialState = initialState.tasks,
@@ -20,19 +21,24 @@ export default (
     case DOWNLOAD_TASKS_SUCCESS:
       state = action.payload.tasks;
 
+      saveTasksLocal(state);
       return [...state];
     case CREATE_TASK_SUCCESS:
       state.push(action.payload.task);
 
+      saveTasksLocal(state);
       return [...state];
     case EDIT_TASK_SUCCESS:
       state.map(task => task._id === action.payload._id ? action.payload : task);
+
+      saveTasksLocal(state);
       return [...state];
       
     // USER ACTIONS
     case LOGOUT_USER:
       state = [];
 
+      clearTasksLocal();
       return [ ...state ];
     default:
       return state;

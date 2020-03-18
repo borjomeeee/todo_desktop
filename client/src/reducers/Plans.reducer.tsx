@@ -12,7 +12,7 @@ import {
 } from "../utils/constants";
 
 // UTILS
-import { savePlansLocal } from "../utils/storage";
+import { savePlansLocal, clearPlansLocal } from "../utils/storage";
 import { PlanActionType } from "../utils/types";
 
 export default (
@@ -37,12 +37,15 @@ export default (
       state.map(plan =>
         plan._id === action.payload._id ? action.payload : plan
       );
+      savePlansLocal(state);
+
       return [...state];
 
     // USER ACTIONS
     case LOGOUT_USER:
       state = [];
 
+      clearPlansLocal();
       return [...state];
 
     case CREATE_TASK_SUCCESS:
