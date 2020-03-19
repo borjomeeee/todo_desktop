@@ -7,7 +7,10 @@ import {
   CREATE_TASK_FAILED,
   EDIT_TASK,
   EDIT_TASK_SUCCESS,
-  EDIT_TASK_FAILED
+  EDIT_TASK_FAILED,
+  REMOVE_TASK,
+  REMOVE_TASK_SUCCESS,
+  REMOVE_TASK_FAILED
 } from "../utils/constants";
 
 import { IAction } from "../utils/constants";
@@ -25,7 +28,11 @@ export interface ICreateTasksSaga extends IAction {
 }
 
 export interface IEditTaskSaga extends IAction {
-  payload: { token: string; planId: string; task: Task; }
+  payload: { token: string; planId: string; task: Task };
+}
+
+export interface IRemoveTaskSaga extends IAction {
+  payload: { token: string; planId: string; taskId: string };
 }
 
 // DOWNLOAD TASKS
@@ -86,5 +93,28 @@ export const editTaskSuccessAction = (task: Task) =>
 export const editTaskFailedAction = (message: string) =>
   ({
     type: EDIT_TASK_FAILED,
+    payload: message
+  } as const);
+
+// REMOVE TASK
+export const removeTaskAction = (
+  token: string,
+  planId: string,
+  taskId: string
+) =>
+  ({
+    type: REMOVE_TASK,
+    payload: { token, planId, taskId }
+  } as const);
+
+export const removeTaskSuccessAction = (taskId: string) =>
+  ({
+    type: REMOVE_TASK_SUCCESS,
+    payload: taskId
+  } as const);
+
+export const removeTaskFailedAction = (message: string) =>
+  ({
+    type: REMOVE_TASK_FAILED,
     payload: message
   } as const);

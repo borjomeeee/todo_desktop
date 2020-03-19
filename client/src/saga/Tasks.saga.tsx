@@ -1,7 +1,7 @@
 import { put, takeEvery } from "redux-saga/effects";
 
 // ACTIONS TYPES
-import { DOWNLOAD_TASKS, CREATE_TASK, EDIT_TASK } from "../utils/constants";
+import { DOWNLOAD_TASKS, CREATE_TASK, EDIT_TASK, REMOVE_TASK } from "../utils/constants";
 
 // ACTIONS
 import {
@@ -13,7 +13,10 @@ import {
   createTaskSuccessAction,
   IEditTaskSaga,
   editTaskFailedAction,
-  editTaskSuccessAction
+  editTaskSuccessAction,
+  IRemoveTaskSaga,
+  removeTaskFailedAction,
+  removeTaskSuccessAction,
 } from "../actions/Tasks.actions";
 
 // MODELS
@@ -94,8 +97,30 @@ function* editTaskSaga({ payload }: IEditTaskSaga) {
   }
 }
 
+function* removeTaskSaga({ payload }: IRemoveTaskSaga) {
+  try {
+    const response = yield fetch(`/tasks/${payload.taskId}/remove`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        auth: payload.token
+      },
+      body: JSON.stringify({
+        planId: payload.planId,
+      })
+    });
+
+    if (!response.ok) return yield put(removeTaskFailedAction(response.data.message));
+  
+    yield put(removeTaskSuccessAction(payload.taskId));
+  } catch(e) {
+    yield put(removeTaskFailedAction(e.message));
+  }
+}
+
 export default function* tasksSaga() {
   yield takeEvery(DOWNLOAD_TASKS, downloadTasksSaga);
   yield takeEvery(CREATE_TASK, createTaskSaga);
-  yield takeEvery(EDIT_TASK, editTaskSaga)
+  yield takeEvery(EDIT_TASK, editTaskSaga);
+  yield takeEvery(REMOVE_TASK, removeTaskSaga);
 }

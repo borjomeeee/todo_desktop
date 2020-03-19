@@ -1,7 +1,7 @@
 import { put, takeEvery } from "redux-saga/effects";
 
 // ACTIONS TYPES
-import { DOWNLOAD_PLANS, CREATE_PLAN, EDIT_PLAN } from "../utils/constants";
+import { DOWNLOAD_PLANS, CREATE_PLAN, EDIT_PLAN, REMOVE_PLAN } from "../utils/constants";
 
 // ACTIONS
 import {
@@ -13,7 +13,10 @@ import {
   createPlanFailedAction,
   IEditPlanSaga,
   editPlanFailedAction,
-  editPlanSuccessAction
+  editPlanSuccessAction,
+  IRemovePlanSaga,
+  removePlanFailedAction,
+  removePlanSuccessAction
 } from "../actions/Plans.actions";
 
 import { Plan } from "../models/Plan.model";
@@ -88,8 +91,27 @@ function* editPlanSaga({ payload }: IEditPlanSaga) {
   }
 }
 
+function* removePlanSaga({ payload }: IRemovePlanSaga) {
+  try {
+    const response = yield fetch(`/plans/${payload.planId}/remove`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        auth: payload.token
+      }
+    });
+
+    if (!response.ok) return yield put(removePlanFailedAction(response.data.message));
+
+    yield put(removePlanSuccessAction(payload.planId));
+  } catch (e) {
+    yield put(removePlanFailedAction(e.message));
+  }
+}
+
 export default function* plansSaga() {
   yield takeEvery(DOWNLOAD_PLANS, downloadPlansSaga);
   yield takeEvery(CREATE_PLAN, createPlanSaga);
   yield takeEvery(EDIT_PLAN, editPlanSaga);
+  yield takeEvery(REMOVE_PLAN, removePlanSaga);
 }

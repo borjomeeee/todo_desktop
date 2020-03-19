@@ -40,7 +40,10 @@ import {
   createTaskFailedAction,
   editTaskAction,
   editTaskSuccessAction,
-  editTaskFailedAction
+  editTaskFailedAction,
+  removeTaskAction,
+  removeTaskSuccessAction,
+  removeTaskFailedAction
 } from "../actions/Tasks.actions";
 
 export type ErrorActionType =
@@ -66,7 +69,9 @@ export type ErrorActionType =
   | ReturnType<typeof downloadTasksSuccessAction>
   | ReturnType<typeof downloadTasksFailedAction>
   | ReturnType<typeof createTaskSuccessAction>
-  | ReturnType<typeof createTaskFailedAction>;
+  | ReturnType<typeof createTaskFailedAction>
+  | ReturnType<typeof removeTaskSuccessAction>
+  | ReturnType<typeof removeTaskFailedAction>
 
 export type UserActionType =
   | ReturnType<typeof loginUserAction>
@@ -87,7 +92,11 @@ export type UserActionType =
   | ReturnType<typeof removePlanFailedAction>
   // TASK ACTIONS
   | ReturnType<typeof downloadTasksSuccessAction>
-  | ReturnType<typeof downloadTasksFailedAction>;
+  | ReturnType<typeof downloadTasksFailedAction>
+  | ReturnType<typeof createTaskSuccessAction>
+  | ReturnType<typeof createTaskFailedAction>
+  | ReturnType<typeof removeTaskSuccessAction>
+  | ReturnType<typeof removeTaskFailedAction>
 
 export type PlanActionType =
   // DOWNLOAD
@@ -110,7 +119,11 @@ export type PlanActionType =
   | ReturnType<typeof logoutUserAction>
   // TASK ACTIONS
   | ReturnType<typeof downloadTasksSuccessAction>
-  | ReturnType<typeof createTaskSuccessAction>;
+  | ReturnType<typeof downloadTasksFailedAction>
+  | ReturnType<typeof createTaskSuccessAction>
+  | ReturnType<typeof createTaskFailedAction>
+  | ReturnType<typeof removeTaskSuccessAction>
+  | ReturnType<typeof removeTaskFailedAction>
 
 export type TaskActionType =
   // DOWLOAD
@@ -125,5 +138,12 @@ export type TaskActionType =
   | ReturnType<typeof editTaskAction>
   | ReturnType<typeof editTaskSuccessAction>
   | ReturnType<typeof editTaskFailedAction>
+  // REMOVE
+  | ReturnType<typeof removeTaskAction>
+  | ReturnType<typeof removeTaskSuccessAction>
+  | ReturnType<typeof removeTaskFailedAction>
+  // PLAN ACTIONS
+  | ReturnType<typeof removePlanSuccessAction>
+  | ReturnType<typeof removePlanFailedAction>
   // USER ACTIONS
   | ReturnType<typeof logoutUserAction>;

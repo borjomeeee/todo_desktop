@@ -43,22 +43,27 @@ export default (
       return [...state];
     case REMOVE_PLAN_SUCCESS:
       state = state.filter(plan => plan._id !== action.payload);
-      return [...state];
-    // USER ACTIONS
-    case LOGOUT_USER:
-      state = [];
+      savePlansLocal(state);
 
-      clearPlansLocal();
       return [...state];
-
+    // TASKS ACTIONS
     case CREATE_TASK_SUCCESS:
       const currCreatePlan = state.filter(
         plan => plan._id === action.payload.id
       );
 
-      if (currCreatePlan.length > 0)
+      if (currCreatePlan.length > 0) {
         currCreatePlan[0].tasks.push(action.payload.task._id);
+        savePlansLocal(state);
+      }
 
+      return [...state];
+
+    // USER ACTIONS
+    case LOGOUT_USER:
+      state = [];
+
+      clearPlansLocal();
       return [...state];
     default:
       return state;
