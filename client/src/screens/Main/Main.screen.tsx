@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import "./Main.screen.scss";
 
 // ACTIONS
-import { createPlanAction } from "../../actions/Plans.actions";
+import { createPlanAction, removePlanAction } from "../../actions/Plans.actions";
 
 // MODELS
 import { Plan } from "../../models/Plan.model";
@@ -24,6 +24,7 @@ type MainScreenType = {
     title: string,
     date: number
   ) => {};
+  removePlan: (token: string, planId: string) => {}
 };
 
 const MainScreen: React.FC<MainScreenType> = ({
@@ -31,14 +32,19 @@ const MainScreen: React.FC<MainScreenType> = ({
   userId,
   plans,
   createPlan,
+  removePlan
 }) => {
   const { isCreatePlan, toggleIsCreatePlan } = usePlanInteraction();
 
-  const savePlan = (title: string, date: Date) => {
+  const createPlanHandler = (title: string, date: Date) => {
     createPlan(token, userId, title, date.getTime());
 
     toggleIsCreatePlan();
   };
+
+  const removePlanHandler = (planId: string) => {
+    removePlan(token, planId);
+  }
 
   return (
     <div className="main">
@@ -47,7 +53,7 @@ const MainScreen: React.FC<MainScreenType> = ({
       <div className="main__plans">
         {isCreatePlan ? (
           <MainCreatePlanForm
-            savePlan={savePlan}
+            savePlan={createPlanHandler}
             closeForm={toggleIsCreatePlan}
           />
         ) : (
@@ -65,6 +71,7 @@ const MainScreen: React.FC<MainScreenType> = ({
               title={plan.title}
               date={plan.date}
               tasks={plan.tasks}
+              removePlan={removePlanHandler}
             />
           ))}
       </div>
@@ -94,6 +101,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
   createPlan: (token: string, userId: string, title: string, date: number) =>
     dispatch(createPlanAction(token, userId, title, date)),
+  removePlan: (token: string, planId: string) => dispatch(removePlanAction(token ,planId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

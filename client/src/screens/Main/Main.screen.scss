@@ -48,6 +48,23 @@
       font-size: 24px;
       height: 65px;
     }
+
+    &-trash {
+      content: "";
+      width: 16px;
+      height: 20px;
+
+      &:hover svg {
+        transition: all .2s;
+        fill: #BCBCBC;
+      }
+    }
+
+    &-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
   
     &-descr {
       display: flex;

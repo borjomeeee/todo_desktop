@@ -79,13 +79,14 @@ router.post('/:id/remove', authMiddleware, async (req, res) => {
     await Plan.deleteOne({ _id: req.params.id });
     const user = await User.findById(req.user.userId);
 
-    user.plans = user.plans.filter(plan => plan !== req.params.id);
+    user.plans = user.plans.filter(plan => plan.toString() !== req.params.id);
     await user.save();
 
     await Task.deleteMany({ planId: req.params.id });
 
-    res.status(200)
+    res.status(200).json();
   } catch (e) {
+    console.log(e);
     res.status(500).json({ message: '[PLAN] SERVER ERROR!' });
   }
 });
