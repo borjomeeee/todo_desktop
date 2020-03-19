@@ -36,7 +36,7 @@ export default (
       saveTasksLocal(state);
       return [...state];
     case REMOVE_TASK_SUCCESS:
-      state = state.filter(task => task._id !== action.payload);
+      state = state.filter(task => task._id !== action.payload.taskId);
 
       saveTasksLocal(state);
       return [...state];

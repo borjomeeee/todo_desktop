@@ -9,7 +9,8 @@ import {
   LOGOUT_USER,
   CREATE_TASK_SUCCESS,
   EDIT_PLAN_SUCCESS,
-  REMOVE_PLAN_SUCCESS
+  REMOVE_PLAN_SUCCESS,
+  REMOVE_TASK_SUCCESS
 } from "../utils/constants";
 
 // UTILS
@@ -54,6 +55,17 @@ export default (
 
       if (currCreatePlan.length > 0) {
         currCreatePlan[0].tasks.push(action.payload.task._id);
+        savePlansLocal(state);
+      }
+
+      return [...state];
+    case REMOVE_TASK_SUCCESS:
+      const currRemovePlan = state.filter(
+        plan => plan._id === action.payload.planId
+      );
+
+      if (currRemovePlan.length > 0) {
+        currRemovePlan[0].tasks = currRemovePlan[0].tasks.filter(task => task !== action.payload.taskId);
         savePlansLocal(state);
       }
 

@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 // UTILS
-import { dateToString } from "../utils/common";
+import { dateToString, numTasksToString } from "../utils/common";
+
+// ICONS
 import { TrashIcon } from "../utils/icons";
 
 type IMainPlanComponent = {
@@ -63,7 +65,7 @@ const MainPlanComponent: React.FC<IMainPlanComponent> = ({
 
         <div className="main__plan-descr">
           <div className="main__plan-date">{dateToString(date)}</div>
-          <div className="main__plan-num-tasks">{`${tasks.length} задач`}</div>
+          <div className="main__plan-num-tasks">{numTasksToString(tasks.length)}</div>
         </div>
       </div>
     </div>

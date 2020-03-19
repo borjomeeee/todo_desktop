@@ -85,11 +85,11 @@ router.post('/:id/remove', authMiddleware, async (req, res) => {
   try {
     await Task.deleteOne({ _id: req.params.id });
 
-    const plan = await Plan.findById(planId);
-    plan.tasks = plan.tasks.filter(task => task !== req.params.id);
+    const plan = await Plan.findById(req.body.planId);
+    plan.tasks = plan.tasks.filter(task => task.toString() !== req.params.id);
     await plan.save();
     
-    res.status(200);
+    res.status(200).json();
   } catch (e) {
     res.status(500).json({ message: '[TASK] SERVER ERROR!' });
   }

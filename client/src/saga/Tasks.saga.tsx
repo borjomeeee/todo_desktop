@@ -112,7 +112,7 @@ function* removeTaskSaga({ payload }: IRemoveTaskSaga) {
 
     if (!response.ok) return yield put(removeTaskFailedAction(response.data.message));
   
-    yield put(removeTaskSuccessAction(payload.taskId));
+    yield put(removeTaskSuccessAction(payload.planId, payload.taskId));
   } catch(e) {
     yield put(removeTaskFailedAction(e.message));
   }

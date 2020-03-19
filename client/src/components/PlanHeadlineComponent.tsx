@@ -28,15 +28,18 @@ const PlanHeadlineComponent: React.FC<IPlanHeadlineComponent> = ({
     toggleEditTitle,
     toggleEditDate,
     changeTitle,
-    changeDate
+    changeDate,
+    setPlanTitle
   } = useEditInputs(title, date);
 
   const savePlanChangesHandler = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
       toggleEditTitle();
 
-      if(planTitle !== title)
+      if(planTitle !== title && planTitle.length > 0)
         onSave(planTitle, planDate.getTime());
+      else
+        setPlanTitle(title);
     }
   }
 
@@ -118,6 +121,9 @@ const useEditInputs = (title: string, date: number) => {
   return {
     planTitle,
     planDate,
+
+    setPlanTitle,
+
     isEditTitle,
     isEditDate,
     toggleEditTitle,

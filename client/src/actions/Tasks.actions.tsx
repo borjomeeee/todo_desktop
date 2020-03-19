@@ -107,10 +107,10 @@ export const removeTaskAction = (
     payload: { token, planId, taskId }
   } as const);
 
-export const removeTaskSuccessAction = (taskId: string) =>
+export const removeTaskSuccessAction = (planId: string, taskId: string) =>
   ({
     type: REMOVE_TASK_SUCCESS,
-    payload: taskId
+    payload: { planId, taskId }
   } as const);
 
 export const removeTaskFailedAction = (message: string) =>
