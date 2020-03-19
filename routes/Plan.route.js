@@ -69,6 +69,22 @@ router.post('/:id/edit', authMiddleware, async (req, res) => {
 
 /**
  * req = {
+ *  user: { userId }
+ *  params: { id }
+ * }
+ */
+router.post('/:id/remove', authMiddleware, async (req, res) => {
+  try {
+    await Plan.deleteOne({ _id: req.params.id });
+
+    res.status(200)
+  } catch (e) {
+    res.status(500).json({ message: '[PLAN] SERVER ERROR!' });
+  }
+});
+
+/**
+ * req = {
  *  user: { userId },
  *  params: { id }
  * }

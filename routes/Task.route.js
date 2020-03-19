@@ -76,6 +76,23 @@ router.post('/:id/edit', authMiddleware, async (req, res) => {
 
 /**
  * req = {
+ *  user: { userId },
+ *  params: { id }
+ * }
+ */
+router.post('/:id/remove', authMiddleware, async (req, res) => {
+  try {
+    await Task.deleteOne({ _id: req.params.id });
+    
+    res.status(200);
+  } catch (e) {
+    res.status(500).json({ message: '[TASK] SERVER ERROR!' });
+  }
+}
+);
+
+/**
+ * req = {
  *  body: { planId }
  *  user: { userId },
  *  params: { id }
