@@ -29,7 +29,7 @@ export default (
       saveTasksLocal(state);
       return [...state];
     case EDIT_TASK_SUCCESS:
-      state.map(task => task._id === action.payload._id ? action.payload : task);
+      state = state.map(task => task._id === action.payload._id ? action.payload : task);
 
       saveTasksLocal(state);
       return [...state];

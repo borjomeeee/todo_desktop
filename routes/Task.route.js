@@ -33,6 +33,28 @@ router.post('/create', authMiddleware, async (req, res) => {
 
 /**
  * req = {
+ *  user: { userId },
+ *  body: { planId }
+ * }
+ */
+router.post('/remove', authMiddleware, async (req, res) => {
+  try {
+    await Task.deleteMany({ planId: req.body.planId });
+
+    const plan = await Plan.findById(planId)
+    plan.tasks = [];
+
+    await plan.save();
+    
+    res.status(200);
+  } catch (e) {
+    res.status(500).json({ message: '[TASK] SERVER ERROR!' });
+  }
+}
+);
+
+/**
+ * req = {
  *  body: { planId }
  *  user: { userId }
  * }
@@ -77,12 +99,17 @@ router.post('/:id/edit', authMiddleware, async (req, res) => {
 /**
  * req = {
  *  user: { userId },
+ *  body: { planId }
  *  params: { id }
  * }
  */
 router.post('/:id/remove', authMiddleware, async (req, res) => {
   try {
     await Task.deleteOne({ _id: req.params.id });
+
+    const plan = await Plan.findById(planId);
+    plan.tasks = plan.tasks.filter(task => task !== req.params.id);
+    await plan.save();
     
     res.status(200);
   } catch (e) {

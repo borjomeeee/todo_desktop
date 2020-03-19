@@ -25,7 +25,10 @@ import {
   createPlanFailedAction,
   editPlanAction,
   editPlanSuccessAction,
-  editPlanFailedAction
+  editPlanFailedAction,
+  removePlanAction,
+  removePlanSuccessAction,
+  removePlanFailedAction
 } from "../actions/Plans.actions";
 
 import {
@@ -57,6 +60,8 @@ export type ErrorActionType =
   | ReturnType<typeof downloadPlansFailedAction>
   | ReturnType<typeof createPlanSuccessAction>
   | ReturnType<typeof createPlanFailedAction>
+  | ReturnType<typeof removePlanSuccessAction>
+  | ReturnType<typeof removePlanFailedAction>
   // TASK ACTIONS
   | ReturnType<typeof downloadTasksSuccessAction>
   | ReturnType<typeof downloadTasksFailedAction>
@@ -74,10 +79,15 @@ export type UserActionType =
   // PLAN ACTIONS
   | ReturnType<typeof downloadPlansSuccessAction>
   | ReturnType<typeof downloadPlansFailedAction>
-  | ReturnType<typeof downloadTasksSuccessAction>
-  | ReturnType<typeof downloadTasksFailedAction>
   | ReturnType<typeof createPlanSuccessAction>
-  | ReturnType<typeof createPlanFailedAction>;
+  | ReturnType<typeof createPlanFailedAction>
+  | ReturnType<typeof editPlanSuccessAction>
+  | ReturnType<typeof editPlanFailedAction>
+  | ReturnType<typeof removePlanSuccessAction>
+  | ReturnType<typeof removePlanFailedAction>
+  // TASK ACTIONS
+  | ReturnType<typeof downloadTasksSuccessAction>
+  | ReturnType<typeof downloadTasksFailedAction>;
 
 export type PlanActionType =
   // DOWNLOAD
@@ -92,6 +102,10 @@ export type PlanActionType =
   | ReturnType<typeof editPlanAction>
   | ReturnType<typeof editPlanSuccessAction>
   | ReturnType<typeof editPlanFailedAction>
+  // REMOVE
+  | ReturnType<typeof removePlanAction>
+  | ReturnType<typeof removePlanSuccessAction>
+  | ReturnType<typeof removePlanFailedAction>
   // USER ACTIONS
   | ReturnType<typeof logoutUserAction>
   // TASK ACTIONS

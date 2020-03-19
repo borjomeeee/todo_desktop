@@ -6,6 +6,7 @@ import {
   CREATE_PLAN_SUCCESS,
   DOWNLOAD_PLANS_FAILED,
   DOWNLOAD_TASKS_FAILED,
+  REMOVE_PLAN_SUCCESS,
 } from "../utils/constants";
 
 import { User } from "../models/User.model";
@@ -52,6 +53,9 @@ export default (
       return new User({ ...state })
     case CREATE_PLAN_SUCCESS:
       state.plans.push(action.payload._id);
+      return new User({ ...state })
+    case REMOVE_PLAN_SUCCESS:
+      state.plans = state.plans.filter(plan => plan !== action.payload)
       return new User({ ...state })
     default:
       return state;

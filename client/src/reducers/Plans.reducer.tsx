@@ -8,7 +8,8 @@ import {
   CREATE_PLAN_SUCCESS,
   LOGOUT_USER,
   CREATE_TASK_SUCCESS,
-  EDIT_PLAN_SUCCESS
+  EDIT_PLAN_SUCCESS,
+  REMOVE_PLAN_SUCCESS
 } from "../utils/constants";
 
 // UTILS
@@ -34,13 +35,15 @@ export default (
 
       return [...state];
     case EDIT_PLAN_SUCCESS:
-      state.map(plan =>
+      state = state.map(plan =>
         plan._id === action.payload._id ? action.payload : plan
       );
       savePlansLocal(state);
 
       return [...state];
-
+    case REMOVE_PLAN_SUCCESS:
+      state = state.filter(plan => plan._id !== action.payload);
+      return [...state];
     // USER ACTIONS
     case LOGOUT_USER:
       state = [];

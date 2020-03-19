@@ -4,6 +4,7 @@ const authMiddleware = require('../middleware/Auth.middleware');
 // MODELS
 const Plan = require('../models/Plan.model');
 const User = require('../models/User.model');
+const Task = require('../models/Task.model');
 
 const router = Router();
 
@@ -76,6 +77,12 @@ router.post('/:id/edit', authMiddleware, async (req, res) => {
 router.post('/:id/remove', authMiddleware, async (req, res) => {
   try {
     await Plan.deleteOne({ _id: req.params.id });
+    const user = await User.findById(req.user.userId);
+
+    user.plans = user.plans.filter(plan => plan !== req.params.id);
+    await user.save();
+
+    await Task.deleteMany({ planId: req.params.id });
 
     res.status(200)
   } catch (e) {

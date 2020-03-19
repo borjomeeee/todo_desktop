@@ -7,7 +7,10 @@ import {
   CREATE_PLAN_FAILED,
   EDIT_PLAN,
   EDIT_PLAN_SUCCESS,
-  EDIT_PLAN_FAILED
+  EDIT_PLAN_FAILED,
+  REMOVE_PLAN,
+  REMOVE_PLAN_SUCCESS,
+  REMOVE_PLAN_FAILED
 } from "../utils/constants";
 
 import { IAction } from "../utils/constants";
@@ -25,7 +28,11 @@ export interface ICreatePlanSaga extends IAction {
 }
 
 export interface IEditPlanSaga extends IAction {
-  payload: { token: string, plan: Plan }
+  payload: { token: string; plan: Plan };
+}
+
+export interface IRemovePlanSaga extends IAction {
+  payload: { token: string; planId: string };
 }
 
 // DOWNLOAD PLANS
@@ -87,5 +94,24 @@ export const editPlanSuccessAction = (plan: Plan) =>
 export const editPlanFailedAction = (message: string) =>
   ({
     type: EDIT_PLAN_FAILED,
+    payload: message
+  } as const);
+
+// REMOVE PLAN
+export const removePlanAction = (token: string, planId: string) =>
+  ({
+    type: REMOVE_PLAN,
+    payload: { token, planId }
+  } as const);
+
+export const removePlanSuccessAction = (planId: string) =>
+  ({
+    type: REMOVE_PLAN_SUCCESS,
+    payload: planId
+  } as const);
+
+export const removePlanFailedAction = (message: string) =>
+  ({
+    type: REMOVE_PLAN_FAILED,
     payload: message
   } as const);

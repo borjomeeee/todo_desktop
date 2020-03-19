@@ -21,7 +21,9 @@ import {
   DOWNLOAD_PLANS_SUCCESS,
   CREATE_PLAN_SUCCESS,
   DOWNLOAD_TASKS_SUCCESS,
-  CREATE_TASK_SUCCESS
+  CREATE_TASK_SUCCESS,
+  REMOVE_PLAN_FAILED,
+  REMOVE_PLAN_SUCCESS
 } from "../utils/constants";
 
 // UTILS
@@ -56,6 +58,7 @@ export default (
     case CLEAR_PLAN_ERROR:
     case DOWNLOAD_PLANS_SUCCESS:
     case CREATE_PLAN_SUCCESS:
+    case REMOVE_PLAN_SUCCESS:
       state.plan = "";
 
       return _.merge(state, {});
@@ -74,6 +77,7 @@ export default (
     // PLAN ERROR ACTIONS
     case DOWNLOAD_PLANS_FAILED:
     case CREATE_PLAN_FAILED:
+    case REMOVE_PLAN_FAILED:
       state.plan = action.payload;
       return _.merge(state, {});
 
