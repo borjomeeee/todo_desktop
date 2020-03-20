@@ -1,0 +1,52 @@
+import { ILoadingInitialState, initialState } from "../redux/store";
+import { LoadingActionType } from "../utils/types";
+import { LOGIN_USER, REGISTER_USER, DOWNLOAD_PLANS, CREATE_PLAN, EDIT_PLAN, REMOVE_PLAN, DOWNLOAD_TASKS, CREATE_TASK, EDIT_TASK, REMOVE_TASK, LOGIN_USER_SUCCESS, REGISTER_USER_SUCCESS, DOWNLOAD_PLANS_SUCCESS, CREATE_PLAN_SUCCESS, EDIT_PLAN_SUCCESS, REMOVE_PLAN_SUCCESS, CREATE_TASK_SUCCESS, EDIT_TASK_SUCCESS, REMOVE_TASK_SUCCESS, LOGIN_USER_FAILED, REGISTER_USER_FAILED, DOWNLOAD_PLANS_FAILED, CREATE_PLAN_FAILED, EDIT_PLAN_FAILED, REMOVE_PLAN_FAILED, DOWNLOAD_TASKS_FAILED, DOWNLOAD_TASKS_SUCCESS, CREATE_TASK_FAILED, EDIT_TASK_FAILED, REMOVE_TASK_FAILED } from "../utils/constants";
+import { LOADING } from "../enums";
+
+export default (state: ILoadingInitialState = initialState.loading, action: LoadingActionType): ILoadingInitialState => {
+  switch(action.type) {
+    // PROCESS
+    case LOGIN_USER:
+    case REGISTER_USER:
+    case DOWNLOAD_PLANS:
+    case CREATE_PLAN:
+    case EDIT_PLAN:
+    case REMOVE_PLAN:
+    case DOWNLOAD_TASKS:
+    case CREATE_TASK:
+    case EDIT_TASK:
+    case REMOVE_TASK:
+      state = LOADING.LOADING_PROCESS;
+      return state;
+
+    // SUCCESS
+    case LOGIN_USER_SUCCESS:
+    case REGISTER_USER_SUCCESS:
+    case DOWNLOAD_PLANS_SUCCESS:
+    case CREATE_PLAN_SUCCESS:
+    case EDIT_PLAN_SUCCESS:
+    case REMOVE_PLAN_SUCCESS:
+    case DOWNLOAD_TASKS_SUCCESS:
+    case CREATE_TASK_SUCCESS:
+    case EDIT_TASK_SUCCESS:
+    case REMOVE_TASK_SUCCESS:
+      state = LOADING.LOADING_SUCCESS;
+      return state;
+
+    // FAILED
+    case LOGIN_USER_FAILED:
+    case REGISTER_USER_FAILED:
+    case DOWNLOAD_PLANS_FAILED:
+    case CREATE_PLAN_FAILED:
+    case EDIT_PLAN_FAILED:
+    case REMOVE_PLAN_FAILED:
+    case DOWNLOAD_TASKS_FAILED:
+    case CREATE_TASK_FAILED:
+    case EDIT_TASK_FAILED:
+    case REMOVE_TASK_FAILED:
+      state = LOADING.LOADING_FAILED;
+      return state;
+    default:
+      return state;
+  }
+}

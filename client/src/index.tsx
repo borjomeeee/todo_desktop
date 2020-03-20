@@ -5,6 +5,7 @@ import * as serviceWorker from "./serviceWorker";
 
 // STYLES
 import "./index.scss";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // NAVIGATORS
 import AppNavigator from "./navigation/App.navigator";

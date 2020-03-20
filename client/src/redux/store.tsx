@@ -3,6 +3,7 @@ import createSagaMiddleware from "redux-saga";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 // REDUCERS
+import LoadingReducer from "../reducers/Loading.reducer";
 import UserReducer from "../reducers/User.reducer";
 import ErrorsReducer from '../reducers/Errors.reducer';
 import PlansReducer from "../reducers/Plans.reducer";
@@ -44,6 +45,7 @@ export type IUserInitialState = typeof initialState.user;
 
 
 const reducers = combineReducers({
+  loading: LoadingReducer,
   user: UserReducer,
   errors: ErrorsReducer,
   plans: PlansReducer,

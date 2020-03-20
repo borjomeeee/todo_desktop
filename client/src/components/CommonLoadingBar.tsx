@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { LOADING } from "../enums";
 
 // ICONS
-import { CloseIcon } from "../utils/icons";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import { CloseIcon, CheckIcon } from "../utils/icons";
+
+// PROGRESS BAR
+import Spinner from "react-bootstrap/Spinner";
 
 type ICommonLoadingBar = {
   loading: LOADING;
@@ -29,7 +31,7 @@ const CommonLoadingBar: React.FC<ICommonLoadingBar> = ({ loading }) => {
     ) {
       setTimeout(
         () => setLoadingData(getLoadingDataByStatus(LOADING.LOADING_STAY)),
-        3000
+        2000
       );
     }
   }, [loading]);
@@ -51,19 +53,19 @@ export const getLoadingDataByStatus = (
       return {
         className: "loading-process",
         text: "Загрузка ...",
-        icon: <CircularProgress color="primary" />
+        icon: <Spinner animation="border" variant="light" size="sm" />
       };
     case LOADING.LOADING_SUCCESS:
       return {
         className: "loading-success",
         text: "Загрузка прошла успешно!",
-        icon: <CircularProgress color="primary" />
+        icon: <CheckIcon width={15} height={15} fill={"#FFFFFF"} />
       };
     case LOADING.LOADING_FAILED:
       return {
         className: "loading-failed",
         text: "Ошибка! Попробуйте снова ...",
-        icon: <CloseIcon width={10} height={10} color={"#FFFFFF"} />
+        icon: <CloseIcon width={15} height={15} fill={"#FFFFFF"} />
       };
     default:
       return {

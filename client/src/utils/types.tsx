@@ -46,6 +46,49 @@ import {
   removeTaskFailedAction
 } from "../actions/Tasks.actions";
 
+export type LoadingActionType =
+  // USER
+  | ReturnType<typeof loginUserAction>
+  | ReturnType<typeof loginUserSuccessAction>
+  | ReturnType<typeof loginUserFailedAction>
+  | ReturnType<typeof registerUserAction>
+  | ReturnType<typeof registerUserSuccessAction>
+  | ReturnType<typeof registerUserFailedAction>
+  // PLANS
+  // DOWNLOAD
+  | ReturnType<typeof downloadPlansAction>
+  | ReturnType<typeof downloadPlansSuccessAction>
+  | ReturnType<typeof downloadPlansFailedAction>
+  // CREATE
+  | ReturnType<typeof createPlanAction>
+  | ReturnType<typeof createPlanSuccessAction>
+  | ReturnType<typeof createPlanFailedAction>
+  // EDIT
+  | ReturnType<typeof editPlanAction>
+  | ReturnType<typeof editPlanSuccessAction>
+  | ReturnType<typeof editPlanFailedAction>
+  // REMOVE
+  | ReturnType<typeof removePlanAction>
+  | ReturnType<typeof removePlanSuccessAction>
+  | ReturnType<typeof removePlanFailedAction>
+  // TASKS
+  // DOWLOAD
+  | ReturnType<typeof downloadTasksAction>
+  | ReturnType<typeof downloadTasksSuccessAction>
+  | ReturnType<typeof downloadTasksFailedAction>
+  // CREATE
+  | ReturnType<typeof createTaskAction>
+  | ReturnType<typeof createTaskSuccessAction>
+  | ReturnType<typeof createTaskFailedAction>
+  // EDIT
+  | ReturnType<typeof editTaskAction>
+  | ReturnType<typeof editTaskSuccessAction>
+  | ReturnType<typeof editTaskFailedAction>
+  // REMOVE
+  | ReturnType<typeof removeTaskAction>
+  | ReturnType<typeof removeTaskSuccessAction>
+  | ReturnType<typeof removeTaskFailedAction>;
+
 export type ErrorActionType =
   | ReturnType<typeof clearAllErrorsAction>
   | ReturnType<typeof clearAuthErrorAction>
@@ -71,7 +114,7 @@ export type ErrorActionType =
   | ReturnType<typeof createTaskSuccessAction>
   | ReturnType<typeof createTaskFailedAction>
   | ReturnType<typeof removeTaskSuccessAction>
-  | ReturnType<typeof removeTaskFailedAction>
+  | ReturnType<typeof removeTaskFailedAction>;
 
 export type UserActionType =
   | ReturnType<typeof loginUserAction>
@@ -96,7 +139,7 @@ export type UserActionType =
   | ReturnType<typeof createTaskSuccessAction>
   | ReturnType<typeof createTaskFailedAction>
   | ReturnType<typeof removeTaskSuccessAction>
-  | ReturnType<typeof removeTaskFailedAction>
+  | ReturnType<typeof removeTaskFailedAction>;
 
 export type PlanActionType =
   // DOWNLOAD
@@ -123,7 +166,7 @@ export type PlanActionType =
   | ReturnType<typeof createTaskSuccessAction>
   | ReturnType<typeof createTaskFailedAction>
   | ReturnType<typeof removeTaskSuccessAction>
-  | ReturnType<typeof removeTaskFailedAction>
+  | ReturnType<typeof removeTaskFailedAction>;
 
 export type TaskActionType =
   // DOWLOAD
