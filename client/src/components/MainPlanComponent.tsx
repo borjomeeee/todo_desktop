@@ -11,7 +11,7 @@ type IMainPlanComponent = {
   id: string;
   title: string;
   date: number;
-  tasks: string[];
+  numTasks: number;
   removePlan: (planId: string) => void
 };
 
@@ -19,7 +19,7 @@ const MainPlanComponent: React.FC<IMainPlanComponent> = ({
   id,
   title,
   date,
-  tasks,
+  numTasks,
 
   removePlan
 }) => {
@@ -65,7 +65,7 @@ const MainPlanComponent: React.FC<IMainPlanComponent> = ({
 
         <div className="main__plan-descr">
           <div className="main__plan-date">{dateToString(date)}</div>
-          <div className="main__plan-num-tasks">{numTasksToString(tasks.length)}</div>
+          <div className="main__plan-num-tasks">{numTasksToString(numTasks)}</div>
         </div>
       </div>
     </div>

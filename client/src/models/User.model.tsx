@@ -1,9 +1,11 @@
+import { Plan } from "./Plan.model";
+
 export interface IUser {
   _id: string;
   token: string;
   name: string;
   email: string;
-  plans: string[];
+  plans: Plan[];
   isAuth: boolean;
 }
 
@@ -12,7 +14,7 @@ export class User implements IUser {
   token: string;
   name: string;
   email: string;
-  plans: string[];
+  plans: Plan[];
   isAuth: boolean;
 
   constructor(

@@ -70,7 +70,7 @@ const MainScreen: React.FC<MainScreenType> = ({
               id={plan._id}
               title={plan.title}
               date={plan.date}
-              tasks={plan.tasks}
+              numTasks={plan.tasks.length}
               removePlan={removePlanHandler}
             />
           ))}

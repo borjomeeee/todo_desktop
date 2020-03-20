@@ -54,7 +54,7 @@ export default (
       );
 
       if (currCreatePlan.length > 0) {
-        currCreatePlan[0].tasks.push(action.payload.task._id);
+        currCreatePlan[0].tasks.push(action.payload.task);
         savePlansLocal(state);
       }
 
@@ -65,7 +65,7 @@ export default (
       );
 
       if (currRemovePlan.length > 0) {
-        currRemovePlan[0].tasks = currRemovePlan[0].tasks.filter(task => task !== action.payload.taskId);
+        currRemovePlan[0].tasks = currRemovePlan[0].tasks.filter(task => task._id !== action.payload.taskId);
         savePlansLocal(state);
       }
 

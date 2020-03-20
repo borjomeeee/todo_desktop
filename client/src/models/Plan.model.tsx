@@ -1,10 +1,12 @@
+import { Task } from "./Task.model";
+
 export interface IPlan {
   _id: string;
   userId: string;
   title: string;
   date: number;
 
-  tasks: string[];
+  tasks: Task[];
 };
 
 export class Plan implements IPlan {
@@ -12,7 +14,7 @@ export class Plan implements IPlan {
   userId: string;
   title: string;
   date: number;
-  tasks: string[];
+  tasks: Task[];
 
   constructor(plan: IPlan) {
     this._id = plan._id;
@@ -25,13 +27,13 @@ export class Plan implements IPlan {
     return this;
   }
 
-  addTask(task: string) {
+  addTask(task: Task) {
     this.tasks.push(task);
     return this;
   }
 
   removeTask(taskId: string) {
-    this.tasks = this.tasks.filter(task => task !== taskId);
+    this.tasks = this.tasks.filter(task => task._id !== taskId);
     return this;
   }
 

@@ -49,13 +49,13 @@ export default (
 
     // PLAN ACTIONS
     case DOWNLOAD_PLANS_SUCCESS:
-      state.plans = action.payload.map(plan => plan._id);
+      state.plans = action.payload;
       return new User({ ...state })
     case CREATE_PLAN_SUCCESS:
-      state.plans.push(action.payload._id);
+      state.plans.push(action.payload);
       return new User({ ...state })
     case REMOVE_PLAN_SUCCESS:
-      state.plans = state.plans.filter(plan => plan !== action.payload)
+      state.plans = state.plans.filter(plan => plan._id !== action.payload)
       return new User({ ...state })
     default:
       return state;
