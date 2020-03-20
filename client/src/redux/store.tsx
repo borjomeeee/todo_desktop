@@ -10,9 +10,14 @@ import TasksReducer from '../reducers/Tasks.reducer';
 
 // ROOT SAGA
 import RootSaga from "../saga/Root.saga";
+
+// MODELS
 import { User } from "../models/User.model";
 import { Plan } from "../models/Plan.model";
 import { Task } from "../models/Task.model";
+
+// ENUMS
+import { LOADING } from "../enums";
 
 // TYPES
 export type IPlnasInitialState = Plan[];
@@ -20,6 +25,7 @@ export type ITasksInitialState = Task[];
 
 // INITIAL STATE
 export const initialState = {
+  loading: LOADING.LOADING_STAY,
   errors: {
     auth: "",
     main: "",
@@ -32,6 +38,7 @@ export const initialState = {
 }
 
 // TYPES
+export type ILoadingInitialState = LOADING;
 export type IErrorsInitialState = typeof initialState.errors;
 export type IUserInitialState = typeof initialState.user;
 

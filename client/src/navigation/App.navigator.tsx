@@ -28,34 +28,33 @@ import {
   downloadTasksAction,
   downloadTasksSuccessAction
 } from "../actions/Tasks.actions";
+import { LOADING } from "../enums";
+import CommonLoadingBar from "../components/CommonLoadingBar";
 
 interface IAppNavigator {
   token: string;
   isAuth: boolean;
-  error: string;
 
   login: (user: User) => {};
-  logout: () => {};
 
   savePlans: (plans: Plan[]) => {};
   saveTasks: (tasks: Task[]) => {};
 
   downloadPlans: (token: string) => {};
   downloadTasks: (token: string) => {};
-  plansId: string[];
+
+  loading: LOADING;
 }
 
 const AppNavigator: React.FC<IAppNavigator> = ({
   token,
   isAuth,
-  error,
   login,
-  logout,
   savePlans,
   saveTasks,
   downloadPlans,
   downloadTasks,
-  plansId
+  loading
 }) => {
   // Проверка если пользователь не авторизован
   useEffect(() => {
@@ -94,7 +93,7 @@ const AppNavigator: React.FC<IAppNavigator> = ({
   // Скачать планы с бд
   useEffect(() => {
     if (isAuth) {
-      downloadTasks(token)
+      downloadTasks(token);
     } else {
       // Проверить есть ли данные в localStorage
       // Если есть, то скачать таски
@@ -107,14 +106,21 @@ const AppNavigator: React.FC<IAppNavigator> = ({
     }
   }, [isAuth, token, downloadTasks, saveTasks]);
 
-  return isAuth ? <MainNavigator /> : <AuthNavigator />;
+  return (
+    <>
+      <CommonLoadingBar loading={loading} />
+      
+      {isAuth ? <MainNavigator /> : <AuthNavigator />}
+    </>
+  );
 };
 
 const mapStateToProps = (state: any) => ({
   token: state.user.token,
   isAuth: state.user.isAuth,
   plansId: state.user.plans,
-  error: state.errors.plan
+  error: state.errors.plan,
+  loading: state.loading
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

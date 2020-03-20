@@ -16,3 +16,21 @@ input:-webkit-autofill {
   -webkit-text-fill-color: #000 !important; /* цвет текста */
   color: #000 !important; /* цвет текста */
 }
+
+.loading {
+  height: 25px;
+
+  display: flex;
+  align-items: center;
+
+  &__icon {
+    margin-left: 20%;
+  }
+
+  &__text {
+    color: #FFFFFF;
+
+    font-size: 14px;
+    margin-left: 30px;
+  }
+}
