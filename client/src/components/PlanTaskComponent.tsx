@@ -29,13 +29,11 @@ const PlanTaskComponent: React.FC<IPlanTaskComponent> = ({
     editTask(token, task.planId, task);
   };
 
-  const toggleEditTask = (event: React.FocusEvent<HTMLInputElement>) => {
+  const toggleEditTask = async (event: React.FocusEvent<HTMLInputElement>) => {
     event.preventDefault();
 
     // Гениальное решение (в будущем переделать)
-    new Promise((resolve, reject) => {
-      setTimeout(() => resolve(), 100)
-    }).then(() => setIsEditTask(!isEditTask))
+    setTimeout(() => setIsEditTask(!isEditTask), 200)
   };
 
   const changeTaskTextHandler = (
@@ -75,39 +73,39 @@ const PlanTaskComponent: React.FC<IPlanTaskComponent> = ({
           }`}
         ></div>
 
-        {!isEditTask ? (
-          <div
-            className={`plan__task-name ${
-              task.checked ? "plan__task-name-crossed" : ""
-            }`}
-            onDoubleClick={() => setIsEditTask(!isEditTask)}
-          >
-            {task.text}
-          </div>
-        ) : (
-          <input
-            type="text"
-            className="plan__task-name plan__task-name-edit"
-            onChange={changeTaskTextHandler}
-            onKeyPress={saveChangesTaskHandler}
-            onBlur={toggleEditTask}
-            value={taskText}
-            autoFocus
-          />
-        )}
-
-        {isEditTask ? (
-          <div className="plan__task-trash">
-            <TrashIcon
-              fill={"#E8E8E8"}
-              width={16}
-              height={20}
-              onClick={removeTaskHandler}
+          {!isEditTask ? (
+            <div
+              className={`plan__task-name ${
+                task.checked ? "plan__task-name-crossed" : ""
+              }`}
+              onDoubleClick={() => setIsEditTask(!isEditTask)}
+            >
+              {task.text}
+            </div>
+          ) : (
+            <input
+              type="text"
+              className="plan__task-name plan__task-name-edit"
+              onChange={changeTaskTextHandler}
+              onKeyPress={saveChangesTaskHandler}
+              onBlur={toggleEditTask}
+              value={taskText}
+              autoFocus
             />
-          </div>
-        ) : (
-          <></>
-        )}
+          )}
+
+          {isEditTask ? (
+            <div className="plan__task-trash">
+              <TrashIcon
+                fill={"#E8E8E8"}
+                width={16}
+                height={20}
+                onClick={removeTaskHandler}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
       </div>
 
       {!isEditTask ? (
