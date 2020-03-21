@@ -2,7 +2,7 @@
 
 ## Install
 
-```
+```js
   npm run up
 
   // to run develop
