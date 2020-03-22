@@ -19,12 +19,22 @@ input:-webkit-autofill {
 }
 
 .loading {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+
   height: 25px;
 
   display: flex;
   align-items: center;
 
   transition: all .4s;
+  transform: translateY(-25px);
+
+  &-process, &-success, &-failed {
+    transform: translateY(0px);
+  }
 
   &-process {
     background-color: #BCBCBC;
@@ -53,5 +63,19 @@ input:-webkit-autofill {
 
     font-size: 14px;
     margin-left: 30px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .loading {
+    justify-content: center;
+
+    &__icon {
+      margin: 0;
+    }
+
+    &__text {
+      margin-left: 15px;
+    }
   }
 }

@@ -120,13 +120,16 @@
     &-top {
       display: flex;
       align-items: center;
+
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      grid-column-gap: 20px;
     }
 
     &-start {
       content: "";
-      display: block;
       
-      width: 20px;
+      width: 20px !important;
       height: 3px;
 
       background-color: #000;
@@ -137,7 +140,6 @@
     }
 
     &-name {
-      margin-left: 25px;
       font-size: 16px;
 
       display: block;
@@ -170,6 +172,24 @@
 
       margin-left: 50px;
       color: #5896F2;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .plan {
+    margin-top: 20px;
+    
+    padding: 0;
+
+    &__tasks {
+      margin: 10px 10px;
+    }
+
+    &__task {
+      &-button {
+        margin-left: 5px;
+      }
     }
   }
 }

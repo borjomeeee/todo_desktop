@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
+import {
+  isMobile
+} from "react-device-detect";
+
 // UTILS
 import { dateToString, numTasksToString } from "../utils/common";
 
@@ -56,7 +60,7 @@ const MainPlanComponent: React.FC<IMainPlanComponent> = ({
 
       <div className="main__plan-bottom">
         <div className="main__plan-trash">
-          {isHovered ? (
+          {isMobile || isHovered ? (
             <TrashIcon fill={"#E8E8E8"} width={16} height={20} onClick={removePlanHandler} />
           ) : (
             <></>

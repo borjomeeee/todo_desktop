@@ -197,10 +197,10 @@ const AuthScreen: React.FC<IAuthScreen> = ({ error, login, register }) => {
               {isLogin ? "Регистрация" : "Создать"}
             </button>
           </div>
-
+{/* 
           <div className="form__google-sign">
             <div> Google Icon! </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

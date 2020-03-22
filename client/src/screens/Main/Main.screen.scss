@@ -135,3 +135,19 @@
     justify-content: space-between;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .main {
+    margin-top: 20px;
+    padding: 0;
+
+    &__title {
+      text-align: center;
+    }
+
+    &__plans {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
