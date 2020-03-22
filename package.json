@@ -12,14 +12,14 @@
   },
   "author": "Andrey Spiridonov <spiridonov.new@gmail.com>",
   "license": "ISC",
-  "proxy": "http://localhost:5000",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.2.6",
     "express": "^4.17.1",
     "express-validator": "^6.4.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.2"
+    "mongoose": "^5.9.2",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "concurrently": "^5.1.0",

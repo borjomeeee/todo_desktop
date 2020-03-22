@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
+const path = require('path');
 
 // ROUTES
 const authRoute = require('./routes/Auth.route');
@@ -8,15 +9,19 @@ const planRoute = require('./routes/Plan.route');
 const taskRoute = require('./routes/Task.route');
 
 // CONFIG
-const PORT = config.get('port') || 5000;
+const PORT = config.get('port');
 const MONGO_URI = config.get('mongoUri');
 
 const app = express();
 app.use(express.json({ extended: true }));
 
+app.use(express.static(__dirname + '/client/build'));
+
 app.use('/auth', authRoute);
 app.use('/plans', planRoute);
-app.use('/tasks', taskRoute)
+app.use('/tasks', taskRoute);
+
+app.get('*', (req, res) =>  res.sendFile(path.join(__dirname, "client", "build", "index.html")));
 
 async function start() {
     try {

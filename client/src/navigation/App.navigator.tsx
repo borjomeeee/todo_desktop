@@ -106,6 +106,8 @@ const AppNavigator: React.FC<IAppNavigator> = ({
     }
   }, [isAuth, token, downloadTasks, saveTasks]);
 
+  console.log(1);
+
   return (
     <>
       <CommonLoadingBar loading={loading} />
